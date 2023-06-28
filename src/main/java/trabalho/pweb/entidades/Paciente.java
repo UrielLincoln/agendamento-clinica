@@ -33,9 +33,9 @@ public class Paciente {
 	private String CPF;
 	
 	@Column(nullable = false, unique = true)
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "contato_id")
-	private List<Telefone> telefone;
+	//@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "contato_id")
+	private String telefone;
 	private Endereco endereco;
 	
 	
