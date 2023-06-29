@@ -1,38 +1,44 @@
 package trabalho.pweb.entidades;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Entity(name = "tb_consulta")
 @Data
+@Entity(name = "tb_consulta")
 public class Consulta {
-	
-	public Consulta() {		
-	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private int minuto;
-	private int hora;
-	private int dias;
-	private int mês;
-	private int ano;
+	@NotNull
+    private LocalTime horario;
+
+	@NotNull
+    private LocalDate data;
 	
-	@OneToOne
-	@JoinColumn(name = "id_cpf")
+	
+	@ManyToOne
+	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 	
-	@OneToOne
-	@JoinColumn(name = "id_crm")
+	@ManyToOne
+	@JoinColumn(name = "id_medico")
 	private Medico medico;	
+	
+	
 
+	
+	
 }

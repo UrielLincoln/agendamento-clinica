@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,8 +31,12 @@ public class Medico {
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
+	
+	@Email
 	@Column(nullable = false, unique = true)
 	private String email;
+	
+	@Column(nullable = false, unique = true)
 	private String CRM;
 	
 	@Column(nullable = false, unique = true)
@@ -41,10 +46,13 @@ public class Medico {
 	
 	@Enumerated(EnumType.STRING)
 	private Especialidades especialidade;
-	@OneToOne
-	@JoinColumn(name = "id_Endereco")
+	//@OneToOne
+	//@JoinColumn(name = "id_Endereco")
+	@Column(nullable = false, unique = true)
 	private Endereco endereco;
 
+	@Column(columnDefinition = "boolean default false")
+    private boolean inativo;
 	
 	
 	

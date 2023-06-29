@@ -41,10 +41,9 @@ public class ConsultaService {
 	public ResponseEntity<ConsultaDto> cadastrar(Consulta proj){
 		Consulta consulta = repository.save(proj);
 		return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico()),HttpStatus.CREATED);
-		
 	}
 	
-	
+	//falta implementar pra cancelar
 	public ResponseEntity<ConsultaDto> deletar(Long id){
 		Optional<Consulta> Consultaop = repository.findById(id);
 		if(Consultaop.isPresent()) {
@@ -54,6 +53,12 @@ public class ConsultaService {
 		else
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
+	
+
+	
+	
+	
 	
 	
 	
