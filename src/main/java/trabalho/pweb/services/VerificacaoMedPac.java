@@ -1,4 +1,4 @@
-package services;
+package trabalho.pweb.services;
 
 import trabalho.pweb.entidades.Medico;
 import trabalho.pweb.entidades.Paciente;

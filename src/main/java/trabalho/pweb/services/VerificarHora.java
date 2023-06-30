@@ -1,4 +1,4 @@
-package services;
+package trabalho.pweb.services;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

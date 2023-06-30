@@ -1,4 +1,4 @@
-package controladores;
+package trabalho.pweb.controladores;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dtos.PacienteDto;
-import services.PacienteService;
+import trabalho.pweb.dtos.PacienteDto;
+import trabalho.pweb.services.PacienteService;
 import trabalho.pweb.entidades.Paciente;
 
 @RestController
@@ -23,7 +23,7 @@ public class PacienteController {
 	@Autowired
 	private PacienteService service;
 	
-	@GetMapping
+	@GetMapping("")
 	public List<PacienteDto> listar(@RequestParam(required = false) String nome){
 		return service.listar(nome);
 	}

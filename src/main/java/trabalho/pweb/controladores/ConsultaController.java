@@ -1,4 +1,4 @@
-package controladores;
+package trabalho.pweb.controladores;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import dtos.ConsultaDto;
-import dtos.PacienteDto;
-import services.ConsultaService;
+import trabalho.pweb.dtos.ConsultaDto;
+import trabalho.pweb.dtos.PacienteDto;
+import trabalho.pweb.services.ConsultaService;
 import trabalho.pweb.entidades.Consulta;
 import trabalho.pweb.entidades.Paciente;
 

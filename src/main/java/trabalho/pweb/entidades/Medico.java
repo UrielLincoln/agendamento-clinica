@@ -46,9 +46,9 @@ public class Medico {
 	
 	@Enumerated(EnumType.STRING)
 	private Especialidades especialidade;
-	//@OneToOne
-	//@JoinColumn(name = "id_Endereco")
-	@Column(nullable = false, unique = true)
+	
+	@OneToOne
+	@JoinColumn(name = "id_Endereco")
 	private Endereco endereco;
 
 	@Column(columnDefinition = "boolean default false")

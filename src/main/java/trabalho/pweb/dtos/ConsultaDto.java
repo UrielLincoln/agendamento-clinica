@@ -1,4 +1,4 @@
-package dtos;
+package trabalho.pweb.dtos;
 
 import java.time.*;
 

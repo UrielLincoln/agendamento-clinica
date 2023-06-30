@@ -1,4 +1,4 @@
-package services;
+package trabalho.pweb.services;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dtos.MedicoDto;
-import repositorios.MedicoRepository;
+import trabalho.pweb.dtos.MedicoDto;
+import trabalho.pweb.repositorios.MedicoRepository;
 import trabalho.pweb.entidades.Medico;
 
 //A listagem deve ser ordenada pelo nome do médico, de maneira crescente, bem como ser paginada, trazendo 10 registros por página.

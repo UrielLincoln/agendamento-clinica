@@ -1,4 +1,4 @@
-package controladores;
+package trabalho.pweb.controladores;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import dtos.MedicoDto;
-import services.MedicoService;
+import trabalho.pweb.dtos.MedicoDto;
+import trabalho.pweb.services.MedicoService;
 import trabalho.pweb.entidades.Medico;
 
 @RestController

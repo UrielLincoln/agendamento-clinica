@@ -1,4 +1,4 @@
-package services;
+package trabalho.pweb.services;
 
 import java.time.*;
 import java.util.List;
@@ -8,13 +8,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-import dtos.ConsultaDto;
-import repositorios.ConsultaRepository;
+import trabalho.pweb.dtos.ConsultaDto;
+import trabalho.pweb.repositorios.ConsultaRepository;
 import trabalho.pweb.entidades.Consulta;
 import trabalho.pweb.entidades.Medico;
 import trabalho.pweb.entidades.Paciente;
 
+@Service
 public class ConsultaService {
 
 	@Autowired
@@ -24,10 +26,10 @@ public class ConsultaService {
 		return lista.stream().map(consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada())).collect(Collectors.toList());
 	}
 	
-	public List<ConsultaDto> listar(String nome){
-		if((nome!=null) && (!nome.equalsIgnoreCase(""))) {
-			return this.converteConsulta(this.repository.findByNomeContaining(nome));
-		}
+	public List<ConsultaDto> listar(String nome) throws Exception{
+		//if((nome!=null) && (!nome.equalsIgnoreCase(""))) {
+		//	return this.converteConsulta(this.repository.findByNomeContaining(nome));
+	//	}
 		return this.converteConsulta(repository.findAll());
 	}
 	

@@ -1,4 +1,4 @@
-package repositorios;
+package trabalho.pweb.repositorios;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import trabalho.pweb.entidades.Medico;
 
 
 
-public interface MedicoRepository extends JpaRepository{
+public interface MedicoRepository extends JpaRepository<Medico, Long>{
 	List<Medico> findByNomeContaining(String nome);
 }

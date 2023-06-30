@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity(name = "pacientes")
@@ -31,7 +33,8 @@ public class Paciente {
 	//@JoinColumn(name = "contato_id")
 	private String telefone;
 	
-	@Column(nullable = false, unique = true)
+	@OneToOne
+	@JoinColumn(name = "id_Endereco")
 	private Endereco endereco;
 	
 	@Column(columnDefinition = "boolean default false")

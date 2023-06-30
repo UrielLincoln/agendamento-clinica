@@ -1,4 +1,4 @@
-package repositorios;
+package trabalho.pweb.repositorios;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import trabalho.pweb.entidades.Consulta;
 
 public interface ConsultaRepository extends JpaRepository<Consulta, Long>{
 
-	List<Consulta> findByNomeContaining(String nome);
 	
 	List<Consulta> findAll();
 
