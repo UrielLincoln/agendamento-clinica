@@ -26,7 +26,7 @@ public class ConsultaService {
 		return lista.stream().map(consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada())).collect(Collectors.toList());
 	}
 	
-	public List<ConsultaDto> listar(String nome) throws Exception{
+	public List<ConsultaDto> listar(String nome){
 		//if((nome!=null) && (!nome.equalsIgnoreCase(""))) {
 		//	return this.converteConsulta(this.repository.findByNomeContaining(nome));
 	//	}
