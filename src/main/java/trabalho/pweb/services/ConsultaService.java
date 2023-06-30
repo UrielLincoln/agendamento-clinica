@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import trabalho.pweb.dtos.ConsultaDto;
+import trabalho.pweb.dtos.PacienteDto;
 import trabalho.pweb.repositorios.ConsultaRepository;
 import trabalho.pweb.entidades.Consulta;
 import trabalho.pweb.entidades.Medico;
@@ -43,9 +44,14 @@ public class ConsultaService {
 	}
 	
 	
-	public ResponseEntity<ConsultaDto> cadastrar(Consulta proj){
-		Consulta consulta = repository.save(proj);
-		return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.CREATED);
+	public ResponseEntity<ConsultaDto> cadastrar(Consulta consulta){
+		
+		if(VerificacaoMedPac.MedicoDisponivel(consulta.getMedico())&&VerificacaoMedPac.PacienteDisponivel(consulta.getPaciente())==true){
+			repository.save(consulta);
+			return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.CREATED);
+		}
+		
+		return new ResponseEntity<ConsultaDto>(HttpStatus.NO_CONTENT);
 	}
 	
 	
