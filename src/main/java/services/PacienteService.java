@@ -68,7 +68,7 @@ public class PacienteService {
 	public ResponseEntity<PacienteDto> deletar(Long id){
 		Optional<Paciente> paciente = repository.findById(id);
 		if(paciente.isPresent()) {
-			repository.delete(paciente.get());
+			paciente.get().setInativo(true);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		else

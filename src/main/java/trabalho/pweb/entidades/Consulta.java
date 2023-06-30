@@ -23,19 +23,33 @@ public class Consulta {
 	private Long id;
 	
 	@NotNull
-    private LocalTime horario;
+    private LocalDateTime horarioEntrada;
+	
+	@NotNull
+    private LocalDateTime horarioSaida;
 
 	@NotNull
     private LocalDate data;
 	
-	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
-	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_medico")
-	private Medico medico;	
+	private Medico medico;
+
+	public Consulta(Long id, @NotNull LocalDateTime horarioEntrada,
+			@NotNull LocalDate data, Paciente paciente, Medico medico) {
+		super();
+		this.id = id;
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSaida = horarioSaida.plusHours(1);
+		this.data = data;
+		this.paciente = paciente;
+		this.medico = medico;
+	}	
 	
 	
 

@@ -1,5 +1,6 @@
 package services;
 
+import java.time.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import dtos.ConsultaDto;
 import repositorios.ConsultaRepository;
 import trabalho.pweb.entidades.Consulta;
+import trabalho.pweb.entidades.Medico;
+import trabalho.pweb.entidades.Paciente;
 
 public class ConsultaService {
 
@@ -18,7 +21,7 @@ public class ConsultaService {
 	private ConsultaRepository repository;
 	
 	public List<ConsultaDto> converteConsulta(List<Consulta> lista){
-		return lista.stream().map(consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico())).collect(Collectors.toList());
+		return lista.stream().map(consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada())).collect(Collectors.toList());
 	}
 	
 	public List<ConsultaDto> listar(String nome){
@@ -32,7 +35,7 @@ public class ConsultaService {
 		Optional<Consulta> op=this.repository.findById(id);
 		if(op.isPresent()) {
 			Consulta consulta=op.get();
-			return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico()),HttpStatus.OK);
+			return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.OK);
 		}
 		return new ResponseEntity<ConsultaDto>(HttpStatus.NOT_FOUND);
 	}
@@ -40,8 +43,21 @@ public class ConsultaService {
 	
 	public ResponseEntity<ConsultaDto> cadastrar(Consulta proj){
 		Consulta consulta = repository.save(proj);
-		return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico()),HttpStatus.CREATED);
+		return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.CREATED);
 	}
+	
+	
+	/*public Consulta agendar(LocalTime entrada, LocalDate data, Paciente paciente, Medico medico) {
+		Consulta consulta = new Consulta();
+		consulta.setHorarioEntrada(entrada);
+		consulta.setHorarioSaida(entrada.plusHours(1));
+		consulta.setPaciente(paciente);
+		consulta.setMedico(medico);;
+		
+		return this.repository.save(consulta);
+	}*/
+	
+	
 	
 	//falta implementar pra cancelar
 	public ResponseEntity<ConsultaDto> deletar(Long id){
