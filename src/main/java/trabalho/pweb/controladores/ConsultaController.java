@@ -28,7 +28,7 @@ public class ConsultaController {
 	
 	@GetMapping
 	public List<ConsultaDto> listar(@RequestParam(required = false) String nome){
-		return service.listar(nome);
+		return service.listar();
 	}
 	
 	

@@ -13,6 +13,7 @@ public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idEndereco")
 	private Long id;
 	
 	@Column(nullable = false)

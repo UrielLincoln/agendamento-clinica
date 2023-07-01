@@ -22,68 +22,58 @@ public class ConsultaService {
 
 	@Autowired
 	private ConsultaRepository repository;
-	
-	public List<ConsultaDto> converteConsulta(List<Consulta> lista){
-		return lista.stream().map(consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada())).collect(Collectors.toList());
+
+	public List<ConsultaDto> converteConsulta(List<Consulta> lista) {
+		return lista.stream().map(
+				consulta -> new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()))
+				.collect(Collectors.toList());
 	}
-	
-	public List<ConsultaDto> listar(String nome){
-		//if((nome!=null) && (!nome.equalsIgnoreCase(""))) {
-		//	return this.converteConsulta(this.repository.findByNomeContaining(nome));
-	//	}
+
+	public List<ConsultaDto> listar() {
+		// depois implementar uma exception pra caso esteja vazia
+
 		return this.converteConsulta(repository.findAll());
 	}
-	
+
 	public ResponseEntity<ConsultaDto> buscaporId(Long id) {
-		Optional<Consulta> op=this.repository.findById(id);
-		if(op.isPresent()) {
-			Consulta consulta=op.get();
-			return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.OK);
+		Optional<Consulta> op = this.repository.findById(id);
+		if (op.isPresent()) {
+			Consulta consulta = op.get();
+			return new ResponseEntity<ConsultaDto>(
+					new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),
+					HttpStatus.OK);
 		}
 		return new ResponseEntity<ConsultaDto>(HttpStatus.NOT_FOUND);
 	}
-	
-	
-	public ResponseEntity<ConsultaDto> cadastrar(Consulta consulta){
-		
-		if(VerificacaoMedPac.MedicoDisponivel(consulta.getMedico())&&VerificacaoMedPac.PacienteDisponivel(consulta.getPaciente())==true){
-			repository.save(consulta);
-			return new ResponseEntity<ConsultaDto>(new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),HttpStatus.CREATED);
+
+	public ResponseEntity<ConsultaDto> cadastrar(Consulta consulta) {
+
+		if (VerificarHora.Verificar(consulta, this) == true) {// Verifica se o horário está ok
+			if (VerificacaoMedPac.MedicoDisponivel(consulta.getMedico())
+					&& VerificacaoMedPac.PacienteDisponivel(consulta.getPaciente())) 
+			{
+				repository.save(consulta);
+				return new ResponseEntity<ConsultaDto>(
+						new ConsultaDto(consulta.getPaciente(), consulta.getMedico(), consulta.getHorarioEntrada()),
+						HttpStatus.CREATED);
+			}
 		}
-		
-		return new ResponseEntity<ConsultaDto>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<ConsultaDto>(HttpStatus.NO_CONTENT);// tem que lançar uma exception, eu acho, ao invés de retornar isso, é provisório
 	}
-	
-	
-	/*public Consulta agendar(LocalTime entrada, LocalDate data, Paciente paciente, Medico medico) {
-		Consulta consulta = new Consulta();
-		consulta.setHorarioEntrada(entrada);
-		consulta.setHorarioSaida(entrada.plusHours(1));
-		consulta.setPaciente(paciente);
-		consulta.setMedico(medico);;
-		
-		return this.repository.save(consulta);
-	}*/
-	
-	
-	
-	//falta implementar pra cancelar
-	public ResponseEntity<ConsultaDto> deletar(Long id){
+
+	public List<Consulta> retornaAll() {
+		return this.repository.findAll();
+
+	}
+
+	// falta implementar pra cancelar
+	public ResponseEntity<ConsultaDto> deletar(Long id) {
 		Optional<Consulta> Consultaop = repository.findById(id);
-		if(Consultaop.isPresent()) {
+		if (Consultaop.isPresent()) {
 			repository.delete(Consultaop.get());
 			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		else
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
-	
 
-	
-	
-	
-	
-	
-	
 }

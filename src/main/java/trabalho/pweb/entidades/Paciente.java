@@ -34,7 +34,7 @@ public class Paciente {
 	private String telefone;
 	
 	@OneToOne
-	@JoinColumn(name = "id_Endereco")
+    @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
 	private Endereco endereco;
 	
 	@Column(columnDefinition = "boolean default false")

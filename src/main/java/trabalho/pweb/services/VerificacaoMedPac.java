@@ -21,4 +21,7 @@ public class VerificacaoMedPac {
 		else
 			return true;
 	}
+	
+	
+	
 }
